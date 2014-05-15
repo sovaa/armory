@@ -4,16 +4,23 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.JsonReader;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+import org.eldslott.armory.entity.Versions;
+import org.eldslott.armory.network.VersionsTask;
+import org.eldslott.armory.network.VersionsReader;
+import org.json.JSONArray;
 
 /**
  * Main activity, handles the tabs.
  */
-public class ArmoryMain extends ActionBarActivity {
-    Fragment searchTab = new SearchTab();
-    Fragment resultTab = new ResultTab();
-    Fragment detailsTab = new DetailsTab();
+public class ArmoryMain extends ActionBarActivity implements CallbackActivity {
+    private Fragment searchTab = new SearchTab();
+    private Fragment resultTab = new ResultTab();
+    private Fragment detailsTab = new DetailsTab();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,24 @@ public class ArmoryMain extends ActionBarActivity {
         actionBar.addTab(actionBarSearchTab);
         actionBar.addTab(actionBarResultsTab);
         actionBar.addTab(actionBarDetailsTab);
+
+        checkDatabaseVersion();
+    }
+
+    private void checkDatabaseVersion() {
+        new VersionsTask(this).execute("http://10.0.2.2:3000/versions.json");
+    }
+
+    @Override
+    public void taskCallback(Class<?> taskClass, JSONArray jsonArray) {
+        if (!VersionsTask.class.equals(taskClass)) {
+            return;
+        }
+
+        Versions version = new VersionsReader().read(jsonArray);
+        Toast.makeText(getBaseContext(), "Version: " + version.toString(), Toast.LENGTH_LONG).show();
+        TextView versionTextView = (TextView)findViewById(R.id.tab_search_versions);
+        versionTextView.setText("Verions: " + version.toString());
     }
 
     /**
