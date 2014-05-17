@@ -6,38 +6,40 @@ import android.view.Menu;
 import android.view.MenuItem;
 import org.eldslott.armory.event.EventMultiplexer;
 import org.eldslott.armory.event.event.CheckBackendVersionsEvent;
+import org.eldslott.armory.event.event.PopulateUICreaturesEvent;
 
 /**
  * Main activity, handles the tabs.
  */
 public class ArmoryMain extends ActionBarActivity {
-    private EventMultiplexer eventMultiplexer = new EventMultiplexer();
+    private EventMultiplexer eventMultiplexer = new EventMultiplexer(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_creature);
-        checkDatabaseVersion();
+
+        eventMultiplexer.onEvent(new CheckBackendVersionsEvent());
+        eventMultiplexer.onEvent(new PopulateUICreaturesEvent());
     }
 
     private void checkDatabaseVersion() {
-        eventMultiplexer.onEvent(new CheckBackendVersionsEvent());
     }
 
     /**
      * Inflate the menu; this adds items to the action bar if it is present.
-     */
+     *
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.armory_main, menu);
         return true;
-    }
+    }*/
 
     /**
      * Handle action bar item clicks here. The action bar will
      * automatically handle clicks on the Home/Up button, so long
      * as you specify a parent activity in AndroidManifest.xml.
-     */
+     *
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -45,5 +47,5 @@ public class ArmoryMain extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

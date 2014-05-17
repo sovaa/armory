@@ -10,24 +10,15 @@
  */
 package org.eldslott.armory.event;
 
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
+import org.eldslott.armory.app.ArmoryMain;
 import org.eldslott.armory.event.handlers.NewBackendDbVersionEventHandler;
 import org.eldslott.armory.event.handlers.ReadVersionsEventHandler;
 import org.eldslott.armory.event.handlers.UpdateCreaturesEventHandler;
 import org.eldslott.armory.event.handlers.UpdateWeaponsEventHandler;
-import org.eldslott.armory.json.CreaturesReader;
-import org.eldslott.armory.json.JsonCallbackReader;
-import org.eldslott.armory.json.VersionsReader;
-import org.eldslott.armory.json.WeaponsReader;
-import org.eldslott.armory.network.CreaturesTask;
-import org.eldslott.armory.network.VersionsTask;
-import org.eldslott.armory.network.WeaponsTask;
-import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author <a href="mailto:oscar.eriksson@sigma.se">Oscar Eriksson</a>
@@ -35,13 +26,19 @@ import java.util.Map;
  */
 public class EventMultiplexer {
     private List<EventHandler<?>> eventHandlers;
+    private FragmentActivity fragmentActivity;
 
-    public EventMultiplexer() {
+    public EventMultiplexer(FragmentActivity fragmentActivity) {
+        this.fragmentActivity = fragmentActivity;
         eventHandlers = new ArrayList<>();
         eventHandlers.add(new NewBackendDbVersionEventHandler(this));
         eventHandlers.add(new UpdateCreaturesEventHandler(this));
         eventHandlers.add(new UpdateWeaponsEventHandler(this));
         eventHandlers.add(new ReadVersionsEventHandler(this));
+    }
+
+    public FragmentActivity getActivity() {
+        return fragmentActivity;
     }
 
     public void onEvent(Event event) {

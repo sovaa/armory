@@ -10,6 +10,9 @@
  */
 package org.eldslott.armory.event;
 
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+
 /**
  * @author <a href="mailto:oscar.eriksson@sigma.se">Oscar Eriksson</a>
  * @date 5/17/14
@@ -23,11 +26,15 @@ public abstract class EventHandler<T extends Event> {
         this.handles = event;
     }
 
+    public abstract void onEvent(T event);
+
+    public FragmentActivity getActivity() {
+        return eventMultiplexer.getActivity();
+    }
+
     public Class<? extends Event> handlesEvent() {
         return handles;
     }
-
-    public abstract void onEvent(T event);
 
     protected void publishEvent(Event event) {
         eventMultiplexer.onEvent(event);

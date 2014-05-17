@@ -53,7 +53,7 @@ public class ReadVersionsEventHandler extends EventHandler<ReadVersionsEvent> {
         publishEvent(new StoreVersionEvent(version));
 
         // TODO: check against stored version in db
-        if (version.getBackend() > 1) {
+        if (version.getDatabase() > 1) {
             publishEvent(new NewBackendDbVersionEvent());
         }
     }

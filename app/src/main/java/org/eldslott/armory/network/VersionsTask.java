@@ -11,8 +11,6 @@
 package org.eldslott.armory.network;
 
 import android.util.Log;
-import org.eldslott.armory.app.CallbackActivity;
-import org.eldslott.armory.event.EventHandler;
 import org.eldslott.armory.event.EventMultiplexer;
 import org.eldslott.armory.event.event.ReadVersionsEvent;
 import org.json.JSONArray;
