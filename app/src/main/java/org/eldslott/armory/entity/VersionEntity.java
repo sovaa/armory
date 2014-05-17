@@ -14,38 +14,39 @@ package org.eldslott.armory.entity;
  * @author <a href="mailto:oscar.eriksson@sigma.se">Oscar Eriksson</a>
  * @date 5/16/14
  */
-public final class Versions {
-    private static final Versions UNKNOWN_VERSION = new Versions(-1, -1, -1);
+public final class VersionEntity extends BaseEntity {
+    private static final VersionEntity UNKNOWN_ENTITY = new VersionEntity(null, -1, -1, -1);
 
     private final Integer database;
     private final Integer backend;
     private final Integer app;
 
-    private Versions(Integer database, Integer backend, Integer app) {
+    private VersionEntity(String backendId, Integer database, Integer backend, Integer app) {
+        this.backendId = backendId;
         this.database = database;
         this.backend = backend;
         this.app = app;
     }
 
-    public static Versions create(Integer database, Integer backend, Integer app) {
-        if (database == null || backend == null || app == null) {
+    public static VersionEntity create(String backendId, Integer database, Integer backend, Integer app) {
+        if (backendId == null || database == null || backend == null || app == null) {
             return unknown();
         }
 
-        return new Versions(database, backend, app);
+        return new VersionEntity(backendId, database, backend, app);
     }
 
     @Override
     public String toString() {
-        return "Versions{" +
+        return "VersionEntity{" +
                 "database=" + database +
                 ", backend=" + backend +
                 ", app=" + app +
-                '}';
+                "} " + super.toString();
     }
 
-    public static Versions unknown() {
-        return UNKNOWN_VERSION;
+    public static VersionEntity unknown() {
+        return UNKNOWN_ENTITY;
     }
 
     public Integer getDatabase() {

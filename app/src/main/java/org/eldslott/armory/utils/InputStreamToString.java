@@ -8,7 +8,7 @@
  * COPYRIGHT (C) 2014 SIGMA SYSTEMS INNOVATION AB.
  * All rights reserved.
  */
-package org.eldslott.armory.network;
+package org.eldslott.armory.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

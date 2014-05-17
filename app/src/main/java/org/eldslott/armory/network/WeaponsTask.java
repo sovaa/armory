@@ -12,37 +12,30 @@ package org.eldslott.armory.network;
 
 import android.util.Log;
 import org.eldslott.armory.app.CallbackActivity;
-import org.eldslott.armory.event.EventHandler;
 import org.eldslott.armory.event.EventMultiplexer;
-import org.eldslott.armory.event.event.ReadVersionsEvent;
 import org.json.JSONArray;
 
 /**
  * @author <a href="mailto:oscar.eriksson@sigma.se">Oscar Eriksson</a>
  * @date 5/15/14
  */
-public class VersionsTask extends BaseTask {
-    public VersionsTask(EventMultiplexer eventMultiplexer) {
+public class WeaponsTask extends BaseTask {
+    public WeaponsTask(EventMultiplexer eventMultiplexer) {
         super(eventMultiplexer);
     }
 
     @Override
     protected JSONArray doInBackground(String... urls) {
         JSONArray jsonArray = null;
-        String url = BASE_URL + "versions.json";
+        String url = BASE_URL + "weapons.json";
 
         try {
             jsonArray = tryToReadResponse(url);
         }
         catch (Exception e) {
-            Log.e(VersionsTask.class.toString(), "Failed to check version: " + e.getMessage());
+            Log.e(WeaponsTask.class.toString(), "Failed to get weapons: " + e.getMessage());
         }
 
         return jsonArray;
-    }
-
-    @Override
-    protected void onPostExecute(JSONArray jsonArray) {
-        eventMultiplexer.onEvent(new ReadVersionsEvent(jsonArray));
     }
 }

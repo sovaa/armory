@@ -8,12 +8,13 @@
  * COPYRIGHT (C) 2014 SIGMA SYSTEMS INNOVATION AB.
  * All rights reserved.
  */
-package org.eldslott.armory.entity;
+package org.eldslott.armory.event.event;
+
+import org.eldslott.armory.event.Event;
 
 /**
  * @author <a href="mailto:oscar.eriksson@sigma.se">Oscar Eriksson</a>
- * @date 5/15/14
+ * @date 5/17/14
  */
-public class Creature extends BaseEntity {
-    private Integer health;
+public class NewBackendDbVersionEvent implements Event {
 }

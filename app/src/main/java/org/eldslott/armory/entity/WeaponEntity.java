@@ -12,30 +12,8 @@ package org.eldslott.armory.entity;
 
 /**
  * @author <a href="mailto:oscar.eriksson@sigma.se">Oscar Eriksson</a>
- * @date 5/15/14
+ * @date 5/17/14
  */
-public abstract class BaseEntity {
-    protected String backendId;
-    protected Integer id;
-    protected String name;
-
-    public String getBackendId() {
-        return backendId;
-    }
-
-    public void setBackendId(String backendId) {
-        this.backendId = backendId;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+public class WeaponEntity extends BaseEntity {
+    private Integer hp;
 }

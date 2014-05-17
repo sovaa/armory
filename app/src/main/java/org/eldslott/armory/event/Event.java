@@ -8,14 +8,11 @@
  * COPYRIGHT (C) 2014 SIGMA SYSTEMS INNOVATION AB.
  * All rights reserved.
  */
-package org.eldslott.armory.app;
-
-import org.json.JSONArray;
+package org.eldslott.armory.event;
 
 /**
  * @author <a href="mailto:oscar.eriksson@sigma.se">Oscar Eriksson</a>
- * @date 5/15/14
+ * @date 5/17/14
  */
-public interface CallbackActivity {
-    public void taskCallback(Class<?> classType, JSONArray jsonArray);
+public interface Event {
 }

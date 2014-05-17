@@ -8,18 +8,25 @@
  * COPYRIGHT (C) 2014 SIGMA SYSTEMS INNOVATION AB.
  * All rights reserved.
  */
-package org.eldslott.armory.factory;
+package org.eldslott.armory.event.event;
 
 import org.eldslott.armory.entity.CreatureEntity;
+import org.eldslott.armory.event.Event;
 
-import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author <a href="mailto:oscar.eriksson@sigma.se">Oscar Eriksson</a>
- * @date 5/15/14
+ * @date 5/17/14
  */
-public class CreatureFactory {
-    public CreatureEntity createFromJsonStream(InputStream is) {
-        return null;
+public class StoreCreaturesEvent implements Event {
+    private List<CreatureEntity> creatureEntities;
+
+    public StoreCreaturesEvent(List<CreatureEntity> creatureEntities) {
+        this.creatureEntities = creatureEntities;
+    }
+
+    public List<CreatureEntity> getCreatureEntities() {
+        return creatureEntities;
     }
 }
